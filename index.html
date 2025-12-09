@@ -1,0 +1,2726 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبارات المحاضرات الطبية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5D5CDE;
+            --secondary-color: #3B82F6;
+            --accent-color: #06B6D4;
+            --success-color: #10B981;
+            --error-color: #EF4444;
+            --warning-color: #F59E0B;
+            --purple-color: #8B5CF6;
+            --pink-color: #EC4899;
+            --dark-bg: #0F172A;
+            --dark-card: #1E293B;
+            --dark-text: #F1F5F9;
+            --light-bg: #F8FAFC;
+            --light-card: #FFFFFF;
+            --light-text: #334155;
+            --gray-200: #E2E8F0;
+            --gray-400: #94A3B8;
+            --gray-600: #475569;
+            --border-radius: 14px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, #5D5CDE 0%, #3B82F6 50%, #06B6D4 100%);
+            --gradient-success: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            --gradient-warning: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+            --gradient-error: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.5;
+            min-height: 100vh;
+            transition: var(--transition);
+            direction: rtl;
+            font-size: 14px;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #0F172A, #1E293B, #1E40AF, #0369A1);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            padding: 5px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.light-mode {
+            background: linear-gradient(-45deg, #F8FAFC, #E2E8F0, #CBD5E1, #94A3B8);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: var(--light-text);
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            width: 100%;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        body.light-mode .subtitle {
+            color: var(--secondary-color);
+        }
+
+        /* Control Buttons - Compact Design */
+        .control-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 8px 10px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 36px;
+        }
+
+        .btn i {
+            font-size: 0.85rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--dark-text);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        body.light-mode .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--light-text);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-warning {
+            background: var(--gradient-warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Category Selection - Compact */
+        .category-section {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .category-title i {
+            font-size: 1rem;
+        }
+
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .category-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: var(--border-radius);
+            padding: 15px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: var(--dark-card);
+            border-radius: calc(var(--border-radius) - 2px);
+            z-index: 2;
+        }
+
+        body.light-mode .category-btn::after {
+            background: var(--light-card);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-btn:hover::before {
+            opacity: 0.1;
+        }
+
+        .category-btn.selected {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .category-btn.selected::before {
+            opacity: 0.15;
+        }
+
+        .category-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            transition: var(--transition);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .category-btn:hover .category-icon {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .category-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--dark-text);
+            line-height: 1.2;
+        }
+
+        body.light-mode .category-name {
+            color: var(--light-text);
+        }
+
+        .category-count {
+            color: var(--accent-color);
+            font-size: 0.7rem;
+            background: rgba(6, 182, 212, 0.15);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        body.light-mode .category-count {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--secondary-color);
+        }
+
+        /* Quiz Container - Compact */
+        .quiz-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            display: none;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .quiz-container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(circle at center, rgba(91, 92, 222, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.5; }
+        }
+
+        .quiz-header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        body.light-mode .quiz-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--gradient-primary);
+        }
+
+        .timer-container, .score-container, .question-counter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            backdrop-filter: blur(5px);
+            text-align: center;
+            min-height: 50px;
+        }
+
+        .timer-container {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        body.light-mode .timer-container {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .timer {
+            color: var(--error-color);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .score-container {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        body.light-mode .score-container {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .score {
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .question-counter {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--dark-text);
+        }
+
+        body.light-mode .question-counter {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--light-text);
+        }
+
+        .question-counter span:first-child {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .question-content {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-right: 3px solid var(--accent-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .question-text {
+            background: rgba(0, 0, 0, 0.02);
+            color: var(--light-text);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 12px 10px;
+            text-align: right;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        body.light-mode .option-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: linear-gradient(135deg, rgba(91, 92, 222, 0.2), rgba(59, 130, 246, 0.15));
+            border-color: var(--primary-color);
+            transform: translateX(-3px);
+            box-shadow: 0 5px 15px rgba(91, 92, 222, 0.25);
+        }
+
+        .option-btn:hover::before {
+            transform: scaleY(1);
+        }
+
+        .option-btn.correct {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.2));
+            border-color: var(--success-color);
+            color: white;
+            animation: pulseCorrect 0.5s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.25);
+        }
+
+        @keyframes pulseCorrect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .option-btn.wrong {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(248, 113, 113, 0.2));
+            border-color: var(--error-color);
+            color: white;
+            animation: shake 0.4s ease;
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.25);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .option-letter {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 6px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+            min-width: 24px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Stats Panel - Compact */
+        .stats-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .stats-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-panel::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .stats-title {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-title i {
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border-radius: 10px;
+            padding: 10px 6px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        body.light-mode .stat-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            font-weight: 500;
+        }
+
+        .progress-container {
+            margin-top: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .progress-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Celebration - Compact */
+        .celebration-container {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .celebration-container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .celebration-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            animation: float 2.5s ease-in-out infinite;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        .celebration-message {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.3;
+        }
+
+        .celebration-score {
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            color: var(--gray-400);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .celebration-container .btn {
+            min-width: 120px;
+            margin: 0 auto;
+        }
+/* Watermark */
+.watermark {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 100;
+    font-family: 'Tajawal', sans-serif;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+body.light-mode .watermark {
+    color: rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.watermark i {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+.watermark:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .watermark:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle 20s infinite linear;
+            filter: blur(0.5px);
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .loader-circle {
+            width: 40px;
+            height: 40px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-color);
+            border-right: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+            animation: confetti-fall 3s ease-in forwards;
+            transform-origin: center;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg) scale(0);
+                opacity: 1;
+            }
+            10% {
+                transform: translateY(10vh) rotate(180deg) scale(1);
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design for Extra Small Screens */
+        @media (max-width: 380px) {
+            .container {
+                padding: 8px;
+            }
+            
+            h1 {
+                font-size: 1.1rem;
+            }
+            
+            .subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .control-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .btn {
+                padding: 6px 8px;
+                font-size: 0.7rem;
+                min-height: 32px;
+            }
+            
+            .btn i {
+                font-size: 0.75rem;
+            }
+            
+            .category-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .category-btn {
+                padding: 12px 10px;
+            }
+            
+            .category-icon {
+                font-size: 1.3rem;
+            }
+            
+            .category-name {
+                font-size: 0.85rem;
+            }
+            
+            .quiz-header {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            
+            .timer-container, .score-container, .question-counter {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 8px 10px;
+                min-height: auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .stat-box {
+                padding: 8px 4px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .stat-label {
+                font-size: 0.65rem;
+            }
+            
+            .option-btn {
+                padding: 10px 8px;
+                font-size: 0.8rem;
+                min-height: 45px;
+            }
+            
+            .option-letter {
+                padding: 2px 5px;
+                font-size: 0.7rem;
+                min-width: 20px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .control-bar {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .watermark {
+                font-size: 0.55rem;
+                padding: 3px 6px;
+            }
+        }
+
+        /* Tablet Optimization */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                padding: 15px;
+                max-width: 768px;
+            }
+            
+            .category-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Optimization */
+        @media (min-width: 1025px) {
+            .container {
+                padding: 20px;
+                max-width: 1000px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- جسيمات عائمة متطورة -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- شاشة التحميل -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+        <div style="color: var(--accent-color); font-size: 1rem; font-weight: 600;">جاري التحميل...</div>
+    </div>
+    
+    <!-- العلامة المائية -->
+    <div class="watermark">
+        <i class="fas fa-code" style="color: var(--accent-color);"></i> 
+        <span>تم التصميم بواسطة: حسن علاء</span>
+    </div>
+
+    <div class="container">
+        <!-- رأس الصفحة -->
+		<header>
+			<h1><i class="fas fa-database"></i> نظام اختبارات Data Mining المتقدم</h1>
+			<p class="subtitle">اختبر معرفتك في استخراج البيانات وتحليل المعلومات</p>
+		</header>
+
+        <!-- أزرار التحكم الرئيسية -->
+        <div class="control-bar">
+            <button class="btn btn-primary" onclick="restartGame()">
+                <i class="fas fa-sync-alt"></i> بدء جديد
+            </button>
+            <button class="btn btn-secondary" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i> الوضع
+            </button>
+            <button class="btn btn-warning" onclick="toggleTimer()" id="timer-toggle">
+                <i class="fas fa-pause"></i> العداد
+            </button>
+            <button class="btn btn-primary" onclick="toggleSound()" id="sound-toggle">
+                <i class="fas fa-volume-up"></i> الصوت
+            </button>
+        </div>
+
+        <!-- قسم اختيار المحاضرات -->
+        <section class="category-section" id="category-section">
+            <h2 class="category-title"><i class="fas fa-book-medical"></i> اختر المحاضرة</h2>
+            <div class="category-buttons" id="category-buttons">
+                <!-- سيتم ملء هذا القسم ديناميكيًا -->
+            </div>
+        </section>
+
+        <!-- حاوية الاختبار -->
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-header">
+                <div class="timer-container">
+                    <i class="fas fa-stopwatch"></i>
+                    <div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">الوقت</div>
+                        <div class="timer" id="timer">30</div>
+                    </div>
+                </div>
+                <div class="score-container">
+                    <i class="fas fa-star"></i>
+                    <div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">النقاط</div>
+                        <div class="score" id="score">0</div>
+                    </div>
+                </div>
+                <div class="question-counter">
+                    <i class="fas fa-question-circle"></i>
+                    <div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">السؤال</div>
+                        <div><span id="current-question">1</span>/<span id="total-questions">0</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-content">
+                <div class="question-text" id="question-text"></div>
+                <div class="options-grid" id="options-container"></div>
+            </div>
+        </div>
+
+        <!-- لوحة الإحصائيات -->
+        <div class="stats-panel" id="stats-panel">
+            <h3 class="stats-title"><i class="fas fa-chart-line"></i> الإحصائيات</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="total-questions-value">0</div>
+                    <div class="stat-label">الإجمالي</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="correct-answers-value" style="color: var(--success-color);">0</div>
+                    <div class="stat-label">الصحيحة</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="wrong-answers-value" style="color: var(--error-color);">0</div>
+                    <div class="stat-label">الخاطئة</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="accuracy-value">0%</div>
+                    <div class="stat-label">الدقة</div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>التقدم</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- رسالة التهنئة -->
+        <div class="celebration-container" id="celebration-container">
+            <div class="celebration-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="celebration-message" id="celebration-message"></h2>
+            <div class="celebration-score" id="celebration-score"></div>
+            <button class="btn btn-primary" onclick="restartGame()">
+                <i class="fas fa-play-circle"></i> بدء جديد
+            </button>
+        </div>
+    </div>
+
+    <!-- حاوية الكونفيتي -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <script>
+        // تعريف المتغيرات العامة
+        let questions = {
+            lec1: [{
+            question: "What is a common reason for missing values in clinical laboratory data?",
+            options: [
+                "Equipment malfunction during testing",
+                "Consistently perfect data entry",
+                "Unlimited patient monitoring resources",
+                "Standardized data collection across all hospitals"
+            ],
+            answer: "Equipment malfunction during testing"
+        },
+        {
+            question: "Which issue can occur when patient records contain errors?",
+            options: [
+                "Improved diagnostic accuracy",
+                "Misleading trends in patient history",
+                "Perfect prediction of patient outcomes",
+                "Guaranteed consistency in clinical datasets"
+            ],
+            answer: "Misleading trends in patient history"
+        },
+        {
+            question: "What is the purpose of data preprocessing?",
+            options: [
+                "To improve data quality",
+                "To decrease data accuracy",
+                "To make data more inconsistent",
+                "To remove all analytical models"
+            ],
+            answer: "To improve data quality"
+        },
+        {
+            question: "What does data preprocessing help ensure?",
+            options: [
+                "Unpredictable model behavior",
+                "Random mining results",
+                "Reliable mining outcomes",
+                "Increased noise in datasets"
+            ],
+            answer: "Reliable mining outcomes"
+        },
+        {
+            question: "What may happen if preprocessing is not applied?",
+            options: [
+                "Mining outcomes remain reliable",
+                "Models will always be accurate",
+                "Data becomes error-free automatically",
+                "Models may give misleading results"
+            ],
+            answer: "Models may give misleading results"
+        },
+        {
+            question: "What is an example of missing data?",
+            options: [
+                "Unrecorded lab test results",
+                "Temperature recorded in both °C and °F",
+                "Blood pressure sensor errors",
+                "Extra repeated measurements"
+            ],
+            answer: "Unrecorded lab test results"
+        },
+        {
+            question: "Which item represents inconsistent data formats?",
+            options: [
+                "Temperature recorded in °C vs °F",
+                "Unrecorded lab values",
+                "Sensor errors in blood pressure",
+                "Missing patient identifiers"
+            ],
+            answer: "Temperature recorded in °C vs °F"
+        },
+        {
+            question: "What is an example of noisy data?",
+            options: [
+                "Fully standardized units",
+                "Perfectly stable readings",
+                "Blood pressure sensor errors",
+                "Missing test results"
+            ],
+            answer: "Blood pressure sensor errors"
+        },
+        {
+            question: "What is one outcome of proper preprocessing?",
+            options: [
+                "Improved data quality and accuracy",
+                "Increased data noise",
+                "More missing values",
+                "Randomized measurements"
+            ],
+            answer: "Improved data quality and accuracy"
+        },
+        {
+            question: "How does preprocessing support model performance?",
+            options: [
+                "It improves tasks such as classification, clustering, and regression",
+                "It prevents models from learning",
+                "It removes the need for any model training",
+                "It makes models produce inconsistent results"
+            ],
+            answer: "It improves tasks such as classification, clustering, and regression"
+        },
+        {
+            question: "Why is preprocessing important in clinical decision-making?",
+            options: [
+                "It ensures regulatory and clinical reliability",
+                "It introduces uncertainty into decisions",
+                "It eliminates the need for validation",
+                "It makes results non-reproducible"
+            ],
+            answer: "It ensures regulatory and clinical reliability"
+        },
+        {
+            question: "Which of the following is a valid method for handling missing values during data cleaning?",
+            options: [
+                "Imputation",
+                "Adding random noise",
+                "Duplicating missing entries",
+                "Ignoring all complete records"
+            ],
+            answer: "Imputation"
+        },
+        {
+            question: "Which example represents a data error that requires correction?",
+            options: [
+                "A negative age value",
+                "Normal temperature reading",
+                "Standard heart rate value",
+                "Correct blood type format"
+            ],
+            answer: "A negative age value"
+        },
+        {
+            question: "Why is removing duplicate or redundant records important?",
+            options: [
+                "To prevent bias caused by repeated entries",
+                "To increase dataset size",
+                "To reduce data accuracy",
+                "To generate more missing values"
+            ],
+            answer: "To prevent bias caused by repeated entries"
+        },
+        {
+            question: "How can noisy clinical measurements be addressed during data cleaning?",
+            options: [
+                "Using smoothing techniques",
+                "Increasing the dataset noise",
+                "Ignoring measurement errors",
+                "Repeating noisy values multiple times"
+            ],
+            answer: "Using smoothing techniques"
+        },
+        {
+            question: "What is the main goal of data integration in clinical settings?",
+            options: [
+                "Combining data from multiple clinical sources",
+                "Increasing missing data",
+                "Generating artificial noise",
+                "Deleting all patient records"
+            ],
+            answer: "Combining data from multiple clinical sources"
+        },
+        {
+            question: "Which system provides general hospital administrative and clinical information?",
+            options: [
+                "Hospital Information System (HIS)",
+                "Weather Monitoring System",
+                "Retail Billing System",
+                "Social Media Data Stream"
+            ],
+            answer: "Hospital Information System (HIS)"
+        },
+        {
+            question: "Laboratory test results typically come from which system?",
+            options: [
+                "Laboratory Information System (LIS)",
+                "Radiology Information System (RIS)",
+                "Traffic Control System",
+                "Banking Transaction System"
+            ],
+            answer: "Laboratory Information System (LIS)"
+        },
+        {
+            question: "Imaging data such as X-rays and MRIs are usually obtained from:",
+            options: [
+                "Radiology Information System (RIS)",
+                "Wearable fitness apps",
+                "Pharmacy billing systems",
+                "Classroom attendance trackers"
+            ],
+            answer: "Radiology Information System (RIS)"
+        },
+        {
+            question: "Which source contributes real-time monitoring data such as heart rate or movement?",
+            options: [
+                "Wearable sensors and patient monitoring devices",
+                "Postal delivery systems",
+                "Restaurant ordering systems",
+                "Library catalog databases"
+            ],
+            answer: "Wearable sensors and patient monitoring devices"
+        },
+        {
+            question: "What major challenge arises when integrating data from different systems?",
+            options: [
+                "Schema and format inconsistencies",
+                "Automatic uniformity of all data",
+                "Guaranteed identical data structures",
+                "Removal of all metadata"
+            ],
+            answer: "Schema and format inconsistencies"
+        },
+        {
+            question: "What is the purpose of normalization during data transformation?",
+            options: [
+                "Bringing lab values into common units",
+                "Adding random noise to measurements",
+                "Increasing the number of missing values",
+                "Removing all numerical features"
+            ],
+            answer: "Bringing lab values into common units"
+        },
+        {
+            question: "Which of the following is an example of aggregation?",
+            options: [
+                "Calculating the daily average heart rate",
+                "Recording every heartbeat individually",
+                "Converting numbers into categories",
+                "Ignoring all sensor readings"
+            ],
+            answer: "Calculating the daily average heart rate"
+        },
+        {
+            question: "What does encoding categorical data involve?",
+            options: [
+                "Converting categories such as gender or diagnosis codes into numerical form",
+                "Deleting all categorical features",
+                "Replacing numbers with text values",
+                "Randomly assigning labels to categories"
+            ],
+            answer: "Converting categories such as gender or diagnosis codes into numerical form"
+        },
+        {
+            question: "What is the main goal of data reduction?",
+            options: [
+                "Simplifying the dataset without losing key information",
+                "Removing all important features",
+                "Increasing dataset size unnecessarily",
+                "Adding more dimensions to the data"
+            ],
+            answer: "Simplifying the dataset without losing key information"
+        },
+        {
+            question: "Which of the following is a common data reduction technique?",
+            options: [
+                "Dimensionality reduction",
+                "Duplicating all features",
+                "Introducing redundant attributes",
+                "Randomly dropping important variables"
+            ],
+            answer: "Dimensionality reduction"
+        },
+        {
+            question: "Which challenge involves protecting sensitive patient information during preprocessing?",
+            options: [
+                "Patient privacy and confidentiality",
+                "Increasing dataset size",
+                "Removing clinical features",
+                "Enhancing noise levels"
+            ],
+            answer: "Patient privacy and confidentiality"
+        },
+        {
+            question: "What is a major challenge caused by data such as genomics, lab tests, and imaging?",
+            options: [
+                "High dimensionality of data",
+                "Limited feature variety",
+                "Perfectly uniform datasets",
+                "Very small data size"
+            ],
+            answer: "High dimensionality of data"
+        },
+        {
+            question: "Which challenge is associated with continuous data flow from ICU or monitoring devices?",
+            options: [
+                "Real-time data streams",
+                "Lack of sensor data",
+                "No need for preprocessing",
+                "Completely static datasets"
+            ],
+            answer: "Real-time data streams"
+        },
+        {
+            question: "What challenge arises when different clinical systems use incompatible formats or standards?",
+            options: [
+                "Interoperability between systems",
+                "Perfect schema alignment",
+                "Automatic standardization of all data",
+                "Identical structures across all hospitals"
+            ],
+            answer: "Interoperability between systems"
+        }
+            ],
+            lec2: [
+			
+    {
+        "question": "What is the purpose of normalization in clinical data mining?",
+        "options": [
+            "To duplicate records for testing purposes",
+            "To remove all missing values from the dataset",
+            "To scale attributes to a common range for better algorithm performance",
+            "To convert categorical data into continuous values"
+        ],
+        "answer": "To scale attributes to a common range for better algorithm performance"
+    },
+    {
+        "question": "Discretization in clinical datasets is used to:",
+        "options": [
+            "Standardize patient ID formats",
+            "Detect duplicate entries",
+            "Increase the number of missing values",
+            "Group continuous data into meaningful intervals"
+        ],
+        "answer": "Group continuous data into meaningful intervals"
+    },
+    {
+        "question": "After handling missing values, inconsistencies, and duplicates, which step comes next?",
+        "options": [
+            "Ignoring irrelevant features",
+            "Random sampling of patient records",
+            "Data entry verification",
+            "Normalization"
+        ],
+        "answer": "Normalization"
+    },
+    {
+        "question": "What does normalization in clinical data refer to?",
+        "options": [
+            "Removing all missing values from the dataset",
+            "Randomly duplicating patient records",
+            "Scaling numerical data into a specific range to ensure equal contribution of variables",
+            "Converting categorical data into text format"
+        ],
+        "answer": "Scaling numerical data into a specific range to ensure equal contribution of variables"
+    },
+    {
+        "question": "Why is normalization important for clinical lab measurements?",
+        "options": [
+            "Because it increases the number of missing values",
+            "Because lab measurements may have different units, like blood glucose vs. blood pressure",
+            "Because it converts data into categorical intervals",
+            "Because it detects duplicate patient records"
+        ],
+        "answer": "Because lab measurements may have different units, like blood glucose vs. blood pressure"
+    },
+    {
+        "question": "How does normalization affect features with large ranges?",
+        "options": [
+            "It deletes them from the dataset",
+            "It converts them into categorical variables",
+            "It prevents them from dominating the analysis",
+            "It amplifies their influence on the results"
+        ],
+        "answer": "It prevents them from dominating the analysis"
+    },
+    {
+        "question": "Which of the following algorithms benefits from normalized clinical data?",
+        "options": [
+            "Randomly duplicating patient records",
+            "K-means clustering",
+            "Ignoring irrelevant features",
+            "Manual data entry verification"
+        ],
+        "answer": "K-means clustering"
+    },
+    {
+        "question": "What is a typical range used for normalization?",
+        "options": [
+            "[1, 10] only",
+            "[-100, 0] only",
+            "[0, 1] or [-1, 1]",
+            "[0, 1000] only"
+        ],
+        "answer": "[0, 1] or [-1, 1]"
+    },
+    {
+        "question": "Which formula represents Min–Max normalization?",
+        "options": [
+            "(X_{norm} = \\frac{X - X_{min}}{X_{max} - X_{min}})",
+            "(X_{norm} = \\frac{X - \\mu}{\\sigma})",
+            "(X_{norm} = X \\times 100)",
+            "(X_{norm} = X + \\mu)"
+        ],
+        "answer": "(X_{norm} = \\frac{X - X_{min}}{X_{max} - X_{min}})"
+    },
+    {
+        "question": "Which formula represents Z-score normalization?",
+        "options": [
+            "(X_{norm} = X + \\sigma)",
+            "(X_{norm} = \\frac{X - \\mu}{\\sigma})",
+            "(X_{norm} = \\frac{X - X_{min}}{X_{max} - X_{min}})",
+            "(X_{norm} = X \\times X_{max})"
+        ],
+        "answer": "(X_{norm} = \\frac{X - \\mu}{\\sigma})"
+    },
+    {
+        "question": "What is an advantage of normalization?",
+        "options": [
+            "Keeps all values within the same range",
+            "Sensitive to outliers",
+            "Distorts extreme values",
+            "Increases missing values"
+        ],
+        "answer": "Keeps all values within the same range"
+    },
+    {
+        "question": "Which is a disadvantage of normalization?",
+        "options": [
+            "Keeps all values within the same range",
+            "Simple and easy to apply",
+            "Improves algorithm performance",
+            "Sensitive to outliers"
+        ],
+        "answer": "Sensitive to outliers"
+    },
+    {
+        "question": "Why is normalization simple to apply?",
+        "options": [
+            "It requires advanced programming",
+            "It duplicates all records",
+            "It only requires basic math operations",
+            "It manually checks each value"
+        ],
+        "answer": "It only requires basic math operations"
+    },
+    {
+        "question": "What happens to extreme values in Min–Max normalization?",
+        "options": [
+            "They can distort the scaling",
+            "They are ignored automatically",
+            "They convert to categories",
+            "They always become zero"
+        ],
+        "answer": "They can distort the scaling"
+    },
+    {
+        "question": "How are blood glucose values between 85 and 240 mg/dL scaled?",
+        "options": [
+            "Scaled to a common range, e.g., 0 to 1",
+            "Left unchanged",
+            "Increased by 100%",
+            "Converted into text labels"
+        ],
+        "answer": "Scaled to a common range, e.g., 0 to 1"
+    },
+    {
+        "question": "What does Z-score normalization do to the data?",
+        "options": [
+            "Converts data to have mean = 0 and standard deviation = 1",
+            "Scales all values between 0 and 1",
+            "Duplicates data records",
+            "Converts data into categorical labels"
+        ],
+        "answer": "Converts data to have mean = 0 and standard deviation = 1"
+    },
+    {
+        "question": "Which formula is used for Z-score normalization?",
+        "options": [
+            "(X_z = \\frac{X - \\mu}{\\sigma})",
+            "(X_z = \\frac{X - X_{min}}{X_{max} - X_{min}})",
+            "(X_z = X \\times 100)",
+            "(X_z = X + \\sigma)"
+        ],
+        "answer": "(X_z = \\frac{X - \\mu}{\\sigma})"
+    },
+    {
+        "question": "What is an advantage of Z-score normalization?",
+        "options": [
+            "Useful when algorithms assume normally distributed data",
+            "Sensitive to outliers",
+            "Only works for categorical data",
+            "Increases the range of extreme values"
+        ],
+        "answer": "Useful when algorithms assume normally distributed data"
+    },
+    {
+        "question": "If a patient's cholesterol level is 250 mg/dL, the mean is 200 mg/dL, and σ = 40, what is the Z-score?",
+        "options": [
+            "1.25",
+            "0.50",
+            "2.00",
+            "1.00"
+        ],
+        "answer": "1.25"
+    },
+    {
+        "question": "What does a Z-score of 1.25 mean in this context?",
+        "options": [
+            "The cholesterol value is 1.25 standard deviations above the mean",
+            "The cholesterol value is below the mean",
+            "The cholesterol value equals the mean",
+            "The cholesterol value is 1.25 times the mean"
+        ],
+        "answer": "The cholesterol value is 1.25 standard deviations above the mean"
+    },
+    {
+        "question": "What is discretization in clinical data mining?",
+        "options": [
+            "Converting continuous attributes into categorical attributes",
+            "Scaling numerical data to [0,1]",
+            "Removing missing values",
+            "Detecting duplicate records"
+        ],
+        "answer": "Converting continuous attributes into categorical attributes"
+    },
+    {
+        "question": "Which of the following is an example of discretization?",
+        "options": [
+            "Age (continuous) → Age Groups (0–18, 19–35, 36–60, 60+)",
+            "Blood glucose normalization to [0,1]",
+            "Removing outliers from lab data",
+            "Randomly duplicating patient records"
+        ],
+        "answer": "Age (continuous) → Age Groups (0–18, 19–35, 36–60, 60+)"
+    },
+    {
+        "question": "What is a benefit of discretization?",
+        "options": [
+            "Simplifies models and improves interpretability",
+            "Increases continuous variability",
+            "Removes categorical data",
+            "Ignores patterns in data"
+        ],
+        "answer": "Simplifies models and improves interpretability"
+    },
+    {
+        "question": "Why is discretization useful for some algorithms?",
+        "options": [
+            "Some algorithms work better with categorical data",
+            "It makes continuous values larger",
+            "It deletes irrelevant patient records",
+            "It automatically predicts outcomes"
+        ],
+        "answer": "Some algorithms work better with categorical data"
+    },
+    {
+        "question": "How does discretization help in clinical datasets?",
+        "options": [
+            "Helps in identifying trends and patterns",
+            "Duplicates all patient records",
+            "Converts data into random numbers",
+            "Ignores patient history"
+        ],
+        "answer": "Helps in identifying trends and patterns"
+    },
+    {
+        "question": "Which of the following is a discretization technique?",
+        "options": [
+            "Equal-width binning",
+            "Z-score normalization",
+            "Min–Max scaling",
+            "Removing missing values"
+        ],
+        "answer": "Equal-width binning"
+    },
+    {
+        "question": "What is Equal-Width Binning?",
+        "options": [
+            "Dividing the range of values into intervals of equal size",
+            "Each bin has the same number of samples",
+            "Bins are based on expert rules or medical standards",
+            "Scaling values to [0,1]"
+        ],
+        "answer": "Dividing the range of values into intervals of equal size"
+    },
+    {
+        "question": "Which type of discretization ensures each bin has approximately the same number of samples?",
+        "options": [
+            "Equal-Frequency Binning",
+            "Equal-Width Binning",
+            "Custom (Domain-Based) Binning",
+            "Z-score normalization"
+        ],
+        "answer": "Equal-Frequency Binning"
+    },
+    {
+        "question": "What is Custom (Domain-Based) Binning?",
+        "options": [
+            "Bins are based on medical standards or expert rules",
+            "Dividing the range into equal intervals",
+            "Making all bins contain equal number of values",
+            "Normalizing values to have mean 0 and std 1"
+        ],
+        "answer": "Bins are based on medical standards or expert rules"
+    },
+    {
+        "question": "Which of the following is an example of Custom Binning for glucose levels?",
+        "options": [
+            "<100 mg/dL → Normal, 100–125 → Pre-diabetic, ≥126 → Diabetic",
+            "70–200 divided into 3 equal intervals",
+            "Sorting glucose values into bins of equal size",
+            "Scaling glucose values to [0,1]"
+        ],
+        "answer": "<100 mg/dL → Normal, 100–125 → Pre-diabetic, ≥126 → Diabetic"
+    }
+
+            ],
+			
+			
+            lec3: [
+    {
+        "question": "What does it mean when a clinical dataset is high-dimensional?",
+        "options": [
+            "It contains very few patient records",
+            "It contains many attributes (features) such as lab results, demographics, or genetic data",
+            "It is stored in a small database",
+            "It has only imaging biomarkers"
+        ],
+        "answer": "It contains many attributes (features) such as lab results, demographics, or genetic data"
+    },
+    {
+        "question": "Which of the following is a consequence of having too many features in clinical datasets?",
+        "options": [
+            "Reduced model complexity",
+            "Model overfitting",
+            "Faster computation",
+            "Easier data interpretation"
+        ],
+        "answer": "Model overfitting"
+    },
+    {
+        "question": "What is the purpose of data transformation and feature selection/extraction?",
+        "options": [
+            "To increase the number of features for analysis",
+            "To simplify data while keeping important information",
+            "To remove patient records randomly",
+            "To make data harder to interpret"
+        ],
+        "answer": "To simplify data while keeping important information"
+    },
+    {
+        "question": "What is the main goal of data transformation?",
+        "options": [
+            "Converting data from one format or scale to another to improve model performance or compatibility",
+            "Removing irrelevant features from the dataset",
+            "Increasing the number of patient records",
+            "Randomly modifying data values"
+        ],
+        "answer": "Converting data from one format or scale to another to improve model performance or compatibility"
+    },
+    {
+        "question": "Data transformation helps in:",
+        "options": [
+            "Improving model performance and ensuring data compatibility",
+            "Making the dataset more complex without purpose",
+            "Deleting important features from the dataset",
+            "Reducing the number of patient samples"
+        ],
+        "answer": "Improving model performance and ensuring data compatibility"
+    },
+    {
+        "question": "What is the purpose of feature selection?",
+        "options": [
+            "Selecting the most relevant features that have the highest impact on prediction or classification tasks",
+            "Increasing the number of features randomly",
+            "Removing all features from the dataset",
+            "Converting data to a new scale"
+        ],
+        "answer": "Selecting the most relevant features that have the highest impact on prediction or classification tasks"
+    },
+    {
+        "question": "Which of the following is an example of feature selection in predicting heart disease?",
+        "options": [
+            "Using only key features like Age, Cholesterol, Blood Pressure, and Smoking History",
+            "Using all available patient data without filtering",
+            "Randomly selecting features unrelated to heart disease",
+            "Ignoring patient demographics"
+        ],
+        "answer": "Using only key features like Age, Cholesterol, Blood Pressure, and Smoking History"
+    },
+    {
+        "question": "How does feature selection help in clinical data analysis?",
+        "options": [
+            "It improves accuracy and interpretability of the model",
+            "It makes data more complex and harder to interpret",
+            "It randomly removes features without impact",
+            "It decreases model performance intentionally"
+        ],
+        "answer": "It improves accuracy and interpretability of the model"
+    },
+    {
+        "question": "Which feature selection method uses statistical measures like correlation, ANOVA, or chi-square test?",
+        "options": [
+            "Filter Methods",
+            "Wrapper Methods",
+            "Embedded Methods",
+            "Dimensionality Reduction"
+        ],
+        "answer": "Filter Methods"
+    },
+    {
+        "question": "Which method evaluates subsets of features based on model performance?",
+        "options": [
+            "Filter Methods",
+            "Wrapper Methods",
+            "Embedded Methods",
+            "Normalization Methods"
+        ],
+        "answer": "Wrapper Methods"
+    },
+    {
+        "question": "Which feature selection method performs selection during model training?",
+        "options": [
+            "Filter Methods",
+            "Wrapper Methods",
+            "Embedded Methods",
+            "Discretization Methods"
+        ],
+        "answer": "Embedded Methods"
+    },
+    {
+        "question": "Which is an example of a wrapper method?",
+        "options": [
+            "Recursive Feature Elimination (RFE)",
+            "Correlation analysis",
+            "LASSO regression",
+            "Equal-width binning"
+        ],
+        "answer": "Recursive Feature Elimination (RFE)"
+    },
+    {
+        "question": "Which feature selection approach might remove highly correlated lab tests?",
+        "options": [
+            "Filter Methods",
+            "Wrapper Methods",
+            "Embedded Methods",
+            "PCA"
+        ],
+        "answer": "Filter Methods"
+    },
+    {
+        "question": "What is the main purpose of feature extraction?",
+        "options": [
+            "To transform original features into a new set that summarizes the most important information",
+            "To remove patient records randomly",
+            "To increase the number of original features",
+            "To convert categorical data to numerical"
+        ],
+        "answer": "To transform original features into a new set that summarizes the most important information"
+    },
+    {
+        "question": "Which technique is commonly used for feature extraction by converting correlated features into uncorrelated components?",
+        "options": [
+            "Principal Component Analysis (PCA)",
+            "Recursive Feature Elimination (RFE)",
+            "Correlation analysis",
+            "Equal-width binning"
+        ],
+        "answer": "Principal Component Analysis (PCA)"
+    },
+    {
+        "question": "PCA reduces the number of features while keeping:",
+        "options": [
+            "Most of the variance in fewer dimensions",
+            "Only the first two original features",
+            "All original features unchanged",
+            "Random features for analysis"
+        ],
+        "answer": "Most of the variance in fewer dimensions"
+    },
+    {
+        "question": "In the example given, 20 lab test results are reduced to 3 main components representing:",
+        "options": [
+            "Liver Function, Kidney Function, Blood Cell Activity",
+            "Heart Rate, Age, Cholesterol",
+            "Smoking History, Exercise Level, Diet",
+            "Blood Pressure, Glucose, BMI"
+        ],
+        "answer": "Liver Function, Kidney Function, Blood Cell Activity"
+    },
+    {
+        "question": "What is the main purpose of Linear Discriminant Analysis (LDA)?",
+        "options": [
+            "Used for classification tasks and maximizes separation between disease groups",
+            "Compresses and reconstructs data using neural networks",
+            "Removes missing values from datasets",
+            "Converts categorical features to numerical"
+        ],
+        "answer": "Used for classification tasks and maximizes separation between disease groups"
+    },
+    {
+        "question": "LDA is typically applied in which type of learning?",
+        "options": [
+            "Supervised learning",
+            "Unsupervised learning",
+            "Reinforcement learning",
+            "Semi-supervised learning"
+        ],
+        "answer": "Supervised learning"
+    },
+    {
+        "question": "Autoencoders are useful for:",
+        "options": [
+            "Compressing and reconstructing data, especially in imaging or genomic datasets",
+            "Reducing data dimensionality using statistical correlation",
+            "Selecting top predictive features for classification",
+            "Normalizing lab test values"
+        ],
+        "answer": "Compressing and reconstructing data, especially in imaging or genomic datasets"
+    },
+    {
+        "question": "What is the goal of the dataset analysis?",
+        "options": [
+            "Predict risk of kidney failure in diabetic patients",
+            "Predict heart disease in healthy patients",
+            "Classify patients by age group only",
+            "Measure blood pressure trends"
+        ],
+        "answer": "Predict risk of kidney failure in diabetic patients"
+    },
+    {
+        "question": "Which step is used first to simplify the dataset?",
+        "options": [
+            "Feature selection to keep only relevant lab tests",
+            "PCA to reduce dimensions",
+            "Visualization of clusters",
+            "Randomly removing patients"
+        ],
+        "answer": "Feature selection to keep only relevant lab tests"
+    },
+    {
+        "question": "After feature selection, which technique is applied to reduce the dataset to 2 main components?",
+        "options": [
+            "Principal Component Analysis (PCA)",
+            "Linear Discriminant Analysis (LDA)",
+            "Autoencoders",
+            "Recursive Feature Elimination (RFE)"
+        ],
+        "answer": "Principal Component Analysis (PCA)"
+    },
+    {
+        "question": "What is the purpose of visualizing patient clusters?",
+        "options": [
+            "To distinguish healthy vs risk groups",
+            "To increase the number of features",
+            "To randomly shuffle lab test results",
+            "To remove irrelevant patient records"
+        ],
+        "answer": "To distinguish healthy vs risk groups"
+    }
+]
+        };
+
+        // تعريف المتغيرات العامة
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let totalQuestions = 0;
+        let timer;
+        let timeLeft = 30;
+        let selectedCategory = "";
+        let audioContext;
+        let soundEnabled = true;
+        let timerRunning = true;
+        let gameActive = false;
+
+        // تهيئة التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        // وظيفة تهيئة التطبيق
+        function initializeApp() {
+            showLoader();
+            
+            // إنشاء أزرار المحاضرات
+            setTimeout(() => {
+                createCategoryButtons();
+                createAdvancedParticles();
+                setupAudioContext();
+                hideLoader();
+                
+                // إظهار لوحة الإحصائيات من البداية
+                document.getElementById('stats-panel').style.display = 'block';
+            }, 800);
+        }
+
+        // إظهار شاشة التحميل
+        function showLoader() {
+            document.getElementById('loader').style.display = 'flex';
+        }
+
+        // إخفاء شاشة التحميل
+        function hideLoader() {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 300);
+        }
+
+        // إنشاء أزرار المحاضرات
+        function createCategoryButtons() {
+            const categoryButtons = document.getElementById('category-buttons');
+            categoryButtons.innerHTML = '';
+            
+            const categories = [
+                { id: 'lec1', name: 'المحاضرة 1', icon: 'fa-microscope', count: questions.lec1.length },
+                { id: 'lec2', name: 'المحاضرة 2', icon: 'fa-filter', count: questions.lec2.length },
+                { id: 'lec3', name: 'المحاضرة 3', icon: 'fa-database', count: questions.lec3.length }
+            ];
+            
+            categories.forEach(category => {
+                const button = document.createElement('div');
+                button.className = 'category-btn';
+                button.id = `category-${category.id}`;
+                button.onclick = () => selectCategory(category.id);
+                
+                button.innerHTML = `
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas ${category.icon}"></i>
+                        </div>
+                        <div class="category-name">${category.name}</div>
+                        <div class="category-count">${category.count} سؤال</div>
+                    </div>
+                `;
+                
+                categoryButtons.appendChild(button);
+            });
+        }
+
+        // إنشاء جسيمات عائمة متطورة
+        function createAdvancedParticles() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            
+            const particleCount = 30;
+            const colors = ['#5D5CDE', '#06B6D4', '#8B5CF6', '#10B981', '#EC4899'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // إعداد سياق الصوت
+        function setupAudioContext() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.log("Web Audio API is not supported in this browser");
+                soundEnabled = false;
+                updateSoundButton();
+            }
+        }
+
+        // تحديث زر الصوت
+        function updateSoundButton() {
+            const soundButton = document.getElementById('sound-toggle');
+            const icon = soundButton.querySelector('i');
+            
+            if (soundEnabled) {
+                icon.className = 'fas fa-volume-up';
+                soundButton.innerHTML = '<i class="fas fa-volume-up"></i> الصوت';
+            } else {
+                icon.className = 'fas fa-volume-mute';
+                soundButton.innerHTML = '<i class="fas fa-volume-mute"></i> الصوت';
+            }
+        }
+
+        // تبديل حالة الصوت
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            updateSoundButton();
+            
+            if (soundEnabled && audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+
+        // تبديل حالة المؤقت
+        function toggleTimer() {
+            timerRunning = !timerRunning;
+            const timerButton = document.getElementById('timer-toggle');
+            const icon = timerButton.querySelector('i');
+            
+            if (timerRunning) {
+                icon.className = 'fas fa-pause';
+                timerButton.innerHTML = '<i class="fas fa-pause"></i> العداد';
+                if (gameActive) {
+                    startTimer();
+                }
+            } else {
+                icon.className = 'fas fa-play';
+                timerButton.innerHTML = '<i class="fas fa-play"></i> العداد';
+                stopTimer();
+            }
+        }
+
+        // اختيار المحاضرة
+        function selectCategory(category) {
+            selectedCategory = category;
+            
+            // إزالة التحديد من جميع الأزرار
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // إضافة التحديد للزر المختار
+            document.getElementById(`category-${category}`).classList.add('selected');
+            
+            // بدء اللعبة
+            startGame();
+        }
+
+        // بدء اللعبة
+        function startGame() {
+            gameActive = true;
+            
+            // إخفاء قسم المحاضرات وإظهار قسم الاختبار
+            document.getElementById('category-section').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('stats-panel').style.display = 'block';
+            
+            // إعادة تعيين الإحصائيات
+            score = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            currentQuestionIndex = 0;
+            
+            // تعيين الأسئلة الحالية
+            currentQuestions = [...questions[selectedCategory]];
+            
+            // خلط الأسئلة عشوائيًا
+            shuffleArray(currentQuestions);
+            
+            // تعيين إجمالي الأسئلة
+            totalQuestions = currentQuestions.length;
+            
+            // تحديث واجهة المستخدم
+            updateStats();
+            displayQuestion();
+            
+            if (timerRunning) {
+                startTimer();
+            }
+            
+            // إخفاء رسالة التهنئة
+            document.getElementById('celebration-container').style.display = 'none';
+            
+            // تشغيل صوت البدء
+            playStartSound();
+        }
+
+        // خلط المصفوفة عشوائيًا
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // عرض السؤال الحالي
+        function displayQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endGame();
+                return;
+            }
+            
+            const question = currentQuestions[currentQuestionIndex];
+            
+            // تحديث نص السؤال
+            document.getElementById('question-text').textContent = question.question;
+            
+            // تحديث عداد الأسئلة
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = totalQuestions;
+            
+            // عرض الخيارات
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            // خلط الخيارات عشوائيًا
+            const shuffledOptions = shuffleArray([...question.options]);
+            
+            shuffledOptions.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.innerHTML = `
+                    <span style="flex: 1; text-align: right;">${option}</span>
+                    <span class="option-letter">${String.fromCharCode(65 + index)}</span>
+                `;
+                button.onclick = () => checkAnswer(option, question.answer);
+                optionsContainer.appendChild(button);
+            });
+            
+            // إعادة تعيين المؤقت
+            resetTimer();
+        }
+
+        // التحقق من الإجابة
+        function checkAnswer(selectedOption, correctAnswer) {
+            if (!gameActive) return;
+            
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            // تعطيل جميع الأزرار
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.style.cursor = 'not-allowed';
+                
+                // تحديد الإجابة الصحيحة والخاطئة
+                const buttonText = button.querySelector('span:first-child').textContent;
+                if (buttonText === correctAnswer) {
+                    button.classList.add('correct');
+                } else if (buttonText === selectedOption && selectedOption !== correctAnswer) {
+                    button.classList.add('wrong');
+                }
+            });
+            
+            // تحديث النقاط بناءً على الإجابة
+            if (selectedOption === correctAnswer) {
+                score += 10;
+                correctAnswers++;
+                playCorrectSound();
+            } else {
+                wrongAnswers++;
+                playWrongSound();
+            }
+            
+            // تحديث الإحصائيات
+            updateStats();
+            
+            // الانتقال إلى السؤال التالي بعد تأخير
+            setTimeout(() => {
+                currentQuestionIndex++;
+                displayQuestion();
+            }, 1200);
+            
+            // إيقاف المؤقت
+            stopTimer();
+        }
+
+        // تشغيل صوت البدء
+        function playStartSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(784, audioContext.currentTime + 0.3);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // تشغيل صوت الإجابة الصحيحة
+        function playCorrectSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(1318.51, audioContext.currentTime + 0.2);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.03);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.type = 'sine';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // تشغيل صوت الإجابة الخاطئة
+        function playWrongSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(220, audioContext.currentTime + 0.15);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.03);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
+                
+                oscillator.type = 'sawtooth';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.25);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // تحديث الإحصائيات
+        function updateStats() {
+            // تحديث النقاط
+            document.getElementById('score').textContent = score;
+            
+            // تحديث الإحصائيات
+            document.getElementById('total-questions-value').textContent = totalQuestions;
+            document.getElementById('correct-answers-value').textContent = correctAnswers;
+            document.getElementById('wrong-answers-value').textContent = wrongAnswers;
+            
+            // حساب الدقة
+            const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+            document.getElementById('accuracy-value').textContent = `${accuracy}%`;
+            
+            // تحديث شريط التقدم
+            const progress = totalQuestions > 0 ? ((currentQuestionIndex) / totalQuestions) * 100 : 0;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-percentage').textContent = `${Math.round(progress)}%`;
+        }
+
+        // بدء المؤقت
+        function startTimer() {
+            if (!timerRunning || !gameActive) return;
+            
+            timeLeft = 30;
+            updateTimerDisplay();
+            
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // تلقائيًا، تعتبر الإجابة خاطئة إذا انتهى الوقت
+                    const currentQuestion = currentQuestions[currentQuestionIndex];
+                    if (currentQuestion) {
+                        checkAnswer(null, currentQuestion.answer);
+                    }
+                    playTimeOutSound();
+                }
+            }, 1000);
+        }
+
+        // تشغيل صوت انتهاء الوقت
+        function playTimeOutSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+                
+                oscillator.type = 'square';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // إيقاف المؤقت
+        function stopTimer() {
+            clearInterval(timer);
+        }
+
+        // إعادة تعيين المؤقت
+        function resetTimer() {
+            stopTimer();
+            if (timerRunning && gameActive) {
+                startTimer();
+            }
+        }
+
+        // تحديث عرض المؤقت
+        function updateTimerDisplay() {
+            const timerElement = document.getElementById('timer');
+            timerElement.textContent = timeLeft;
+            
+            // تغيير لون المؤقت عندما يقل الوقت
+            if (timeLeft <= 10) {
+                timerElement.style.color = 'var(--error-color)';
+                timerElement.style.animation = timeLeft <= 5 ? 'shake 0.5s ease infinite' : 'none';
+            } else if (timeLeft <= 20) {
+                timerElement.style.color = 'var(--warning-color)';
+                timerElement.style.animation = 'none';
+            } else {
+                timerElement.style.color = 'var(--accent-color)';
+                timerElement.style.animation = 'none';
+            }
+        }
+
+        // نهاية اللعبة
+        function endGame() {
+            gameActive = false;
+            
+            // إيقاف المؤقت
+            stopTimer();
+            
+            // إخفاء قسم الاختبار
+            document.getElementById('quiz-container').style.display = 'none';
+            
+            // عرض رسالة التهنئة
+            const celebrationContainer = document.getElementById('celebration-container');
+            const celebrationMessage = document.getElementById('celebration-message');
+            const celebrationScore = document.getElementById('celebration-score');
+            
+            // تحديد الرسالة بناءً على النتيجة
+            let message = "";
+            let icon = "";
+            
+            const percentage = (score / (totalQuestions * 10)) * 100;
+            
+            if (percentage >= 90) {
+                message = "إبداع! أداء استثنائي";
+                icon = "fa-crown";
+            } else if (percentage >= 80) {
+                message = "ممتاز! أداء رائع";
+                icon = "fa-trophy";
+            } else if (percentage >= 70) {
+                message = "جيد جدًا! أحسنت";
+                icon = "fa-medal";
+            } else if (percentage >= 60) {
+                message = "جيد! يمكنك التحسين";
+                icon = "fa-star";
+            } else if (percentage >= 50) {
+                message = "مقبول! واصل التعلم";
+                icon = "fa-graduation-cap";
+            } else {
+                message = "حاول مرة أخرى!";
+                icon = "fa-redo";
+            }
+            
+            celebrationMessage.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+            celebrationScore.textContent = `النقاط: ${score} (${correctAnswers} صحيحة من ${totalQuestions}) - الدقة: ${Math.round(percentage)}%`;
+            
+            celebrationContainer.style.display = 'block';
+            playWinSound();
+            
+            // إنشاء الكونفيتي
+            createConfetti();
+        }
+
+        // تشغيل صوت الفوز
+        function playWinSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const notes = [
+                    {freq: 523.25, duration: 0.15},
+                    {freq: 659.25, duration: 0.15},
+                    {freq: 783.99, duration: 0.15},
+                    {freq: 1046.50, duration: 0.3}
+                ];
+                
+                let currentTime = audioContext.currentTime;
+                
+                notes.forEach((note, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = note.freq;
+                    oscillator.type = 'triangle';
+                    
+                    gainNode.gain.setValueAtTime(0, currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.2, currentTime + 0.03);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, currentTime + note.duration);
+                    
+                    oscillator.start(currentTime);
+                    oscillator.stop(currentTime + note.duration);
+                    
+                    currentTime += 0.1;
+                });
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // إنشاء تأثير الكونفيتي
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti-container');
+            confettiContainer.innerHTML = '';
+            
+            const colors = ['#5D5CDE', '#06B6D4', '#8B5CF6', '#10B981', '#EC4899', '#F59E0B', '#EF4444'];
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = `${Math.random() * 8 + 4}px`;
+                confetti.style.height = `${Math.random() * 8 + 4}px`;
+                confetti.style.animationDelay = `${Math.random() * 1}s`;
+                confetti.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                
+                confettiContainer.appendChild(confetti);
+            }
+            
+            // إزالة الكونفيتي بعد 5 ثوانٍ
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        // إعادة اللعبة
+        function restartGame() {
+            gameActive = false;
+            
+            // إعادة تعيين كل شيء
+            document.getElementById('category-section').style.display = 'block';
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('celebration-container').style.display = 'none';
+            document.getElementById('stats-panel').style.display = 'block';
+            
+            // إزالة التحديد من الأزرار
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // إيقاف المؤقت
+            stopTimer();
+            
+            // إعادة تعيين المؤقت
+            timeLeft = 30;
+            updateTimerDisplay();
+            
+            // إزالة الكونفيتي
+            document.getElementById('confetti-container').innerHTML = '';
+            
+            // إعادة تعيين الإحصائيات
+            score = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+            updateStats();
+            
+            // تشغيل صوت إعادة التعيين
+            playResetSound();
+        }
+
+        // تشغيل صوت إعادة التعيين
+        function playResetSound() {
+            if (!soundEnabled || !audioContext) return;
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(392, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(523.25, audioContext.currentTime + 0.2);
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.type = 'sine';
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                console.log("Audio error:", e);
+            }
+        }
+
+        // تبديل الوضع الداكن/الفاتح
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            
+            // تغيير الأيقونة
+            const toggleButton = document.querySelector('button[onclick="toggleDarkMode()"]');
+            const icon = toggleButton.querySelector('i');
+            
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+                icon.style.color = '#F59E0B';
+            } else {
+                icon.className = 'fas fa-moon';
+                icon.style.color = '#06B6D4';
+            }
+        }
+    </script>
+</body>
+
+</html>
